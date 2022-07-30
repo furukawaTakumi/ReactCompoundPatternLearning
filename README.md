@@ -7,7 +7,7 @@
 Tabs.tsx のメモ
 ・プロバイダーパターンを使用している(createContext, Context.Provider value = context)
 ・useTabs を Tabs で宣言し，実装している
-・useMemo でコンテキストの書き換えを監視している
+・useMemo でコンテキストの変化を監視している
 ・Tabs.xxxx でアクセスできるようにしている
 ・setActiveTab
 ・activeTab を useTabs で利用できるようにしている．
@@ -16,6 +16,13 @@ Tabs.tsx のメモ
 
 プログラム仕様メモ
 ディレクトリ構造
+
+- src
+  - Tabs
+    - index.tsx
+    - Panel.tsx
+    - Tab.tsx
+    - Tabs.tsx
 
 index.html
 

@@ -17,7 +17,7 @@ const TabsContext = React.createContext<ITabsContext | null>(null);
 const Tabs: React.FC<React.PropsWithChildren> & TabsComposition = (props) => {
   const [activeTab, setActiveTab] = React.useState<string>("a");
 
-  const memolizedContextValue = useMemo<ITabsContext | null>(() => {
+  const memolizedContextValue = useMemo<ITabsContext>(() => {
     return {
       activeTab,
       setActiveTab,
