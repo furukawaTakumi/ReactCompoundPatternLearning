@@ -6,7 +6,7 @@ import "./index.css";
 
 // このインターフェースを備えた内容を再現実装していく．
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <Tabs>
