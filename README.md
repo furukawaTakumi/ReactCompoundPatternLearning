@@ -130,3 +130,11 @@ return (
  
 const rootElement = document.getElementById('root');
 render(<App />, rootElement);
+
+# 再現メモ復元学習をやった学びめも
+
+- createContext では，createContext<interface | null>とするが，その後に Provider を戻り値に含めるコンポーネントでは必ず interface の値を useState の値から memo 化をおこなってから Provider に受け渡すので null が渡ってしまうことはない．また，useXXXX 　の実装で null が戻り値に含まれないようにガードするため，null の影響は実質的に外部のコンポーネントに伝わってしまうことがない．だから，createContext の使用では初期化の値として null を入力しても問題がない．ではなぜ，null を渡す必要があるのかについては，useXXXX の実装を行いたいから，コンポーネントの外側で createContext を行う必要があるため，外では null を渡すしかないのだと考えられる．
+- お手本にしたコードはどうやら利用した React のバージョンと異なっており，FC 型で children が付与されているようだが，本環境では FC でプロップスを包み込んだだけでは children は付与されない．なので，PropsWithChildren で型を拡張する必要がある
+- createcontext は XXXX.Provider とセットで利用する
+- Tabs.Tab, Tabs.Panel とするために，それぞれの interface を定義して&で混ぜて，その実態を代入してあげることで，<Tabs.Tab>というような形でコンポーネントを公開できるようになる．まとまった，グループの要素なのだということが強調される点がイケてる
+- 上記を行うために interface を定義する
