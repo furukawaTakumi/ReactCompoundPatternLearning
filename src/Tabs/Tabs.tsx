@@ -1,28 +1,23 @@
 import React, { useContext, useMemo } from "react";
-import { FunctionComponent } from "react";
-import { Panel, PanelProps } from "./Panel";
-import { Tab, TabProps } from "./Tab";
+import { Panel, IPanelProps } from "./Panel";
+import { Tab, ITabProps } from "./Tab";
 
 interface TabsComposition {
-  Panel: FunctionComponent<PanelProps>;
-  Tab: FunctionComponent<TabProps>;
-}
-
-interface TabsProps {
-  children?: React.ReactNode;
+  Panel: React.FC<React.PropsWithChildren<IPanelProps>>;
+  Tab: React.FC<React.PropsWithChildren<ITabProps>>;
 }
 
 interface ITabsContext {
   activeTab: string;
-  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
+  setActiveTab: (label: string) => void; // React.Dispatchで表現しなくても良い
 }
 
 const TabsContext = React.createContext<ITabsContext | null>(null);
 
-const Tabs: FunctionComponent<TabsProps> & TabsComposition = ({ children }) => {
+const Tabs: React.FC<React.PropsWithChildren> & TabsComposition = (props) => {
   const [activeTab, setActiveTab] = React.useState<string>("a");
 
-  const memolizedContext = useMemo<ITabsContext | null>(() => {
+  const memolizedContextValue = useMemo<ITabsContext | null>(() => {
     return {
       activeTab,
       setActiveTab,
@@ -30,8 +25,8 @@ const Tabs: FunctionComponent<TabsProps> & TabsComposition = ({ children }) => {
   }, [activeTab, setActiveTab]);
 
   return (
-    <TabsContext.Provider value={memolizedContext}>
-      {children}
+    <TabsContext.Provider value={memolizedContextValue}>
+      {props.children}
     </TabsContext.Provider>
   );
 };
